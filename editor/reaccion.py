@@ -102,7 +102,7 @@ KEYWORDS = {"ROBOTS", "ROBOT", "ROBOTITOS", "SHANGHAI", "CHINA", "24", "HORAS", 
             "ARGENTINA", "MANEJANDO", "UBER", "COMPARTÍ", "BAÑO", "ENFERMA", "SEIS", "CUATRO", "SERIE",
             "LIBRO", "MUSK", "TRANSPORTE", "SIGNIFICAR", "DESCANSAR"}
 
-BODY = ["resultado", "seguridad", "pasar", "libro", "habilidades"]
+BODY = ["resultado", "pasar", "libro", "habilidades"]
 BODY_FULL = ["shanghai"] + BODY
 
 V = {
@@ -110,7 +110,7 @@ V = {
                body=BODY, cta=["cta_comentarios"], music="tech",
                end=("¿CUÁL QUERÉS PRIMERO?", "ÉXITO · VENTA · COMUNICACIÓN")),
     "v2": dict(nombre="polemica", hook=["hook_pasar"], headline=("¿TU TRABAJO", "ESTÁ EN PELIGRO?"),
-               body=["shanghai", "resultado", "seguridad", "pasar_corto", "libro", "habilidades"],
+               body=["shanghai", "resultado", "pasar_corto", "libro", "habilidades"],
                cta=["cta_serie"], music="epica", end=("NUEVA SERIE", "SEGUIME PARA NO PERDÉRTELA")),
     "v3": dict(nombre="advertencia", hook=["maneja"], headline=("SI TRABAJÁS DE UBER", "MIRÁ ESTO"),
                body=BODY_FULL, cta=["cta_compartir"], music="tension",
@@ -123,6 +123,14 @@ V = {
                end=("ESCRIBIME AL PRIVADO", "Y EMPEZAMOS A PREPARARNOS")),
 }
 BLOCKS["hook_pasar"] = dict(src="L", ranges=[(83.42, 88.14)], layout="full", gfx=[])
+BLOCKS["libro_corto"] = dict(BLOCKS["libro"], ranges=[(96.58, 101.06), (101.98, 113.46), (122.97, 124.22)])
+BLOCKS["seguridad_corta"] = dict(BLOCKS["seguridad"], ranges=[(2.36, 5.92), (18.82, 25.48)], gfx=[
+    (2.36, 5.92, "Tag", "ROBOTS DE SEGURIDAD", 540, 190),
+    (22.44, 25.48, "BoxWhite", "VS. UN GUARDIA DORMIDO", 540, 760)])
+CORTO = ["shanghai", "resultado", "pasar", "libro", "habilidades"]
+for _k in ("v3", "v4", "v5"):
+    V[_k]["body"] = CORTO
+V["v2"]["body"] = ["shanghai", "resultado", "pasar_corto", "libro", "habilidades"]
 
 GAP, PRE, POST = 0.25, 0.06, 0.10
 XF = 0.30
