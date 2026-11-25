@@ -1,0 +1,8 @@
+.editor { max-width: 760px; margin: 0 auto; padding: 32px 16px; text-align: left; }
+.editor header { margin-bottom: 24px; }
+.editor h1 { margin: 0; font-size: 2rem; }
+.marca { margin: 4px 0 0; opacity: .6; }
+.panel { display: flex; flex-direction: column; gap: 16px; padding: 20px; border: 1px solid #8884; border-radius: 12px; margin-bottom: 20px; }
+.panel label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
+.panel input, .panel textarea { font: inherit; font-weight: 400; padding: 10px; border-radius: 8px; border: 1px solid #8886; background: transparent; color: inherit; }
+.vista-previa p { white-space: pre-wrap; }
