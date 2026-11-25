@@ -21,7 +21,7 @@ SRC, TRANS, OUT, FONTS = sys.argv[1:5]
 os.makedirs(OUT, exist_ok=True)
 SR = syn.SR
 FPS = 30
-GOLD = "&H0017A0D4&"
+GOLD = "&H0000FFD4&"
 WHITE = "&H00FFFFFF&"
 
 # ------------------------------------------------------------------ EDL
@@ -304,7 +304,7 @@ ev(cta_start + 1.6, TOTAL, "BoxGold", POP + r"{\pos(540,820)}ESCRIBIME AL PRIVAD
 ev(cta_start + 2.8, TOTAL, "PlaceSub", POP + r"{\pos(540,960)}ESPECIALMENTE SI ESTÁS EN")
 ev(cta_start + 3.2, TOTAL, "CtaCountry", POP + r"{\pos(540,1080)}MÉXICO · COLOMBIA")
 ev(cta_start + 4.3, TOTAL, "LogoBig",
-   POP + r"{\pos(540,1290)}JOE{\1a&HFF&\3c&H17A0D4&\bord4}NETWORK{\1a&H00&\bord0}.ARG")
+   POP + r"{\pos(540,1290)}JOE{\c&H0000FFD4&}.NETWORK")
 for d, g in [(0.25, 0.5), (1.6, 0.6), (3.2, 0.5)]:
     fx(syn.pop(int(d * 10)), cta_start + d, g)
 fx(syn.ding(), cta_start + 4.3, 0.4)
@@ -358,26 +358,26 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Cap,Bebas Neue,140,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,2,0,1,7,4,2,70,70,560,1
-Style: CapHook,Bebas Neue,165,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,2,0,1,8,4,2,60,60,560,1
-Style: Logo,Bebas Neue,62,&H00FFFFFF,&H00FFFFFF,&H0017A0D4,&H00000000,0,0,0,0,100,100,3,0,1,0,2,8,40,40,95,1
-Style: LogoBig,Bebas Neue,120,&H00FFFFFF,&H00FFFFFF,&H0017A0D4,&H00000000,0,0,0,0,100,100,3,0,1,0,0,5,40,40,0,1
-Style: Headline,Bebas Neue,130,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,2,0,1,7,4,5,40,40,0,1
-Style: BoxGold,Bebas Neue,105,&H000B0B0C,&H000B0B0C,&H0017A0D4,&H00000000,0,0,0,0,100,100,2,0,3,18,0,5,40,40,0,1
-Style: Place,Bebas Neue,190,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,6,0,1,6,5,5,40,40,0,1
-Style: PlaceSub,Bebas Neue,64,{GOLD},{GOLD},&H00000000,&H90000000,0,0,0,0,100,100,5,0,1,4,3,5,40,40,0,1
-Style: Big,Bebas Neue,210,{GOLD},{GOLD},&H00000000,&H90000000,0,0,0,0,100,100,3,0,1,8,5,5,40,40,0,1
-Style: Num,Bebas Neue,380,{GOLD},{GOLD},&H00000000,&H90000000,0,0,0,0,100,100,0,0,1,10,6,5,40,40,0,1
-Style: NumSub,Bebas Neue,92,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,2,0,1,6,3,5,40,40,0,1
-Style: CtaBig,Bebas Neue,150,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,2,0,1,7,4,5,40,40,0,1
-Style: CtaCountry,Bebas Neue,120,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,4,0,1,6,4,5,40,40,0,1
+Style: Cap,Barlow Condensed,123,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,800,-1,0,0,100,100,2,0,1,7,4,2,70,70,560,1
+Style: CapHook,Barlow Condensed,145,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,800,-1,0,0,100,100,2,0,1,8,4,2,60,60,560,1
+Style: Logo,Barlow Condensed,55,&H00FFFFFF,&H00FFFFFF,&H0000FFD4,&H00000000,800,-1,0,0,100,100,3,0,1,0,2,8,40,40,95,1
+Style: LogoBig,Barlow Condensed,106,&H00FFFFFF,&H00FFFFFF,&H0000FFD4,&H00000000,800,-1,0,0,100,100,3,0,1,0,0,5,40,40,0,1
+Style: Headline,Barlow Condensed,114,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,800,-1,0,0,100,100,2,0,1,7,4,5,40,40,0,1
+Style: BoxGold,Barlow Condensed,92,&H00101410,&H00101410,&H0000FFD4,&H00000000,800,-1,0,0,100,100,2,0,3,18,0,5,40,40,0,1
+Style: Place,Barlow Condensed,167,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,800,-1,0,0,100,100,6,0,1,6,5,5,40,40,0,1
+Style: PlaceSub,Barlow Condensed,56,{GOLD},{GOLD},&H00000000,&H90000000,800,-1,0,0,100,100,5,0,1,4,3,5,40,40,0,1
+Style: Big,Barlow Condensed,185,{GOLD},{GOLD},&H00000000,&H90000000,800,-1,0,0,100,100,3,0,1,8,5,5,40,40,0,1
+Style: Num,Barlow Condensed,334,{GOLD},{GOLD},&H00000000,&H90000000,800,-1,0,0,100,100,0,0,1,10,6,5,40,40,0,1
+Style: NumSub,Barlow Condensed,81,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,800,-1,0,0,100,100,2,0,1,6,3,5,40,40,0,1
+Style: CtaBig,Barlow Condensed,132,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,800,-1,0,0,100,100,2,0,1,7,4,5,40,40,0,1
+Style: CtaCountry,Barlow Condensed,106,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,800,-1,0,0,100,100,4,0,1,6,4,5,40,40,0,1
 Style: Dim,Arial,20,&H70000000,&H70000000,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
 logo = (f"Dialogue: 3,{ass_t(0)},{ass_t(cta_start)},Logo,,0,0,0,,"
-        r"JOE{\1a&HFF&\3c&H17A0D4&\bord2}NETWORK{\1a&H00&\bord0}.ARG")
+        r"JOE{\c&H0000FFD4&}.NETWORK")
 with open(f"{OUT}/subs.ass", "w") as f:
     f.write(header + "\n".join([logo] + graphics + caps) + "\n")
 
@@ -385,7 +385,7 @@ with open(f"{OUT}/subs.ass", "w") as f:
 print("Render final…")
 final = f"{OUT}/reel_cristo_rey_joenetwork.mp4"
 run(["ffmpeg", "-y", "-v", "error", "-i", joined, "-i", f"{OUT}/mix.wav",
-     "-f", "lavfi", "-i", f"color=c=0xD4A017:s=1080x12:r={FPS}:d={TOTAL:.3f}",
+     "-f", "lavfi", "-i", f"color=c=0xD4FF00:s=1080x12:r={FPS}:d={TOTAL:.3f}",
      "-filter_complex",
      f"[0][2]overlay=x='-W+W*t/{TOTAL:.3f}':y=H-12:shortest=1[b];[b]subtitles={OUT}/subs.ass:fontsdir={FONTS}[v];"
      "[1]loudnorm=I=-14:TP=-1.5:LRA=11[a]",

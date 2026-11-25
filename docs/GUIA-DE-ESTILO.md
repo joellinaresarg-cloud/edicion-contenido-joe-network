@@ -1,5 +1,7 @@
 # Guía de estilo · joenetwork.arg
 
+> ⚠️ **Guía anterior.** La identidad oficial vigente es la de [IDENTIDAD-VISUAL.md](IDENTIDAD-VISUAL.md) (negro + lima eléctrico).
+
 ![Guía de estilo joenetwork.arg](estilo/joenetwork-guia.png)
 
 Cuenta de negocios: comunicación, negocios, ventas, network marketing y productos.

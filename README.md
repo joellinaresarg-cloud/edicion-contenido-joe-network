@@ -2,9 +2,11 @@
 
 Aplicación web para editar contenido, hecha con React, TypeScript y Vite.
 
-**Guía de estilo de joenetwork.arg:** [docs/GUIA-DE-ESTILO.md](docs/GUIA-DE-ESTILO.md)
+**Identidad visual oficial de JOE.NETWORK:** [docs/IDENTIDAD-VISUAL.md](docs/IDENTIDAD-VISUAL.md)
 
 **Guía de hooks y guiones:** [docs/GUIA-DE-HOOKS.md](docs/GUIA-DE-HOOKS.md)
+
+![Ejemplo de portada](docs/estilo/ejemplo-portada-optimus.png)
 
 ## Uso
 

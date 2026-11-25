@@ -27,7 +27,7 @@ VERSIONS = sys.argv[4:]
 CACHE = f"{OUT}/cache"
 os.makedirs(CACHE, exist_ok=True)
 SR, FPS = syn.SR, 30
-GOLD, WHITE = "&H0017A0D4&", "&H00FFFFFF&"
+GOLD, WHITE = "&H0000FFD4&", "&H00FFFFFF&"
 
 # ------------------------------------------------------------------ Material
 SOURCES = {  # video de la persona hablando: (archivo, transcripción, posición vertical del recorte)
@@ -207,7 +207,7 @@ def render_clip(src, a, dur, layout, zoom, broll=None):
         W, H = int(np.ceil(1080 * zoom / 2) * 2), int(np.ceil(1920 * zoom / 2) * 2)
         vf = (f"[0:v]scale={W}:{H}:flags=lanczos,setsar=1,crop=1080:960:(iw-1080)/2:ih*{cy}[me];"
               f"[1:v]scale=1080:1920:flags=lanczos,setsar=1,crop=1080:960:0:(ih-960)*{by},fps={FPS}[br];"
-              f"[br][me]vstack,{GRADE},drawbox=x=0:y=955:w=1080:h=10:color=0xD4A017:t=fill,"
+              f"[br][me]vstack,{GRADE},drawbox=x=0:y=955:w=1080:h=10:color=0xD4FF00:t=fill,"
               f"fps={FPS},format=yuv420p[v]")
         inputs = ["-ss", f"{a:.3f}", "-i", f"{MEDIA}/{vid}", "-ss", f"{bs:.3f}", "-i", f"{MEDIA}/{bfile}"]
     run(["ffmpeg", "-y", "-v", "error", *inputs, "-filter_complex", vf, "-map", "[v]", "-an",
@@ -245,18 +245,18 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Cap,Bebas Neue,140,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,2,0,1,7,4,5,60,60,0,1
-Style: CapSplit,Bebas Neue,118,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,2,0,1,7,3,5,60,60,0,1
-Style: Logo,Bebas Neue,62,&H00FFFFFF,&H00FFFFFF,&H0017A0D4,&H00000000,0,0,0,0,100,100,3,0,1,0,2,8,40,40,40,1
-Style: LogoBig,Bebas Neue,120,&H00FFFFFF,&H00FFFFFF,&H0017A0D4,&H00000000,0,0,0,0,100,100,3,0,1,0,0,5,40,40,0,1
-Style: Headline,Bebas Neue,125,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,2,0,1,7,4,5,40,40,0,1
-Style: BoxGold,Bebas Neue,100,&H000B0B0C,&H000B0B0C,&H0017A0D4,&H00000000,0,0,0,0,100,100,2,0,3,16,0,5,40,40,0,1
-Style: BoxWhite,Bebas Neue,100,&H000B0B0C,&H000B0B0C,&H00FFFFFF,&H00000000,0,0,0,0,100,100,2,0,3,16,0,5,40,40,0,1
-Style: Tag,Bebas Neue,66,{GOLD},{GOLD},&H00000000,&H90000000,0,0,0,0,100,100,5,0,1,5,3,5,40,40,0,1
-Style: Big,Bebas Neue,190,{GOLD},{GOLD},&H00000000,&H90000000,0,0,0,0,100,100,3,0,1,8,5,5,40,40,0,1
-Style: Card,Bebas Neue,120,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,3,0,1,7,4,5,40,40,0,1
-Style: List,Bebas Neue,92,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,3,0,1,6,3,5,40,40,0,1
-Style: EndBig,Bebas Neue,150,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,2,0,1,7,4,5,40,40,0,1
+Style: Cap,Barlow Condensed,123,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,800,-1,0,0,100,100,2,0,1,7,4,5,60,60,0,1
+Style: CapSplit,Barlow Condensed,104,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,800,-1,0,0,100,100,2,0,1,7,3,5,60,60,0,1
+Style: Logo,Barlow Condensed,55,&H00FFFFFF,&H00FFFFFF,&H0000FFD4,&H00000000,800,-1,0,0,100,100,3,0,1,0,2,8,40,40,40,1
+Style: LogoBig,Barlow Condensed,106,&H00FFFFFF,&H00FFFFFF,&H0000FFD4,&H00000000,800,-1,0,0,100,100,3,0,1,0,0,5,40,40,0,1
+Style: Headline,Barlow Condensed,110,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,800,-1,0,0,100,100,2,0,1,7,4,5,40,40,0,1
+Style: BoxGold,Barlow Condensed,88,&H00101410,&H00101410,&H0000FFD4,&H00000000,800,-1,0,0,100,100,2,0,3,16,0,5,40,40,0,1
+Style: BoxWhite,Barlow Condensed,88,&H00101410,&H00101410,&H00FFFFFF,&H00000000,800,-1,0,0,100,100,2,0,3,16,0,5,40,40,0,1
+Style: Tag,Barlow Condensed,58,{GOLD},{GOLD},&H00000000,&H90000000,800,-1,0,0,100,100,5,0,1,5,3,5,40,40,0,1
+Style: Big,Barlow Condensed,167,{GOLD},{GOLD},&H00000000,&H90000000,800,-1,0,0,100,100,3,0,1,8,5,5,40,40,0,1
+Style: Card,Barlow Condensed,106,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,800,-1,0,0,100,100,3,0,1,7,4,5,40,40,0,1
+Style: List,Barlow Condensed,81,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,800,-1,0,0,100,100,3,0,1,6,3,5,40,40,0,1
+Style: EndBig,Barlow Condensed,132,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,800,-1,0,0,100,100,2,0,1,7,4,5,40,40,0,1
 Style: Dim,Arial,20,&H60000000,&H60000000,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
 
 [Events]
@@ -378,7 +378,7 @@ def build(vname):
     # ---------------- subtítulos y gráficos
     ev = []
     ev.append(f"Dialogue: 3,{ass_t(0)},{ass_t(total)},Logo,,0,0,0,,"
-              r"JOE{\1a&HFF&\3c&H17A0D4&\bord2}NETWORK{\1a&H00&\bord0}.ARG")
+              r"JOE{\c&H0000FFD4&}.NETWORK")
     if cfg["headline"]:
         l1, l2 = cfg["headline"]
         y1 = 300 if BLOCKS[cfg["hook"][0]]["layout"] == "full" else 640
@@ -395,7 +395,7 @@ def build(vname):
     ev.append(f"Dialogue: 5,{ass_t(total + 0.05)},{ass_t(TOTAL)},EndBig,,0,0,0,,{POP}{{\\pos(540,760)}}{e1}")
     ev.append(f"Dialogue: 5,{ass_t(total + 0.35)},{ass_t(TOTAL)},BoxGold,,0,0,0,,{POP}{{\\pos(540,920)}}{e2}")
     ev.append(f"Dialogue: 5,{ass_t(total + 0.8)},{ass_t(TOTAL)},LogoBig,,0,0,0,,{POP}"
-              r"{\pos(540,1120)}JOE{\1a&HFF&\3c&H17A0D4&\bord4}NETWORK{\1a&H00&\bord0}.ARG")
+              r"{\pos(540,1120)}JOE{\c&H0000FFD4&}.NETWORK")
     # subtítulos
     items = []
     for s, e, txt, src, st, lay in sorted(words_tl):
@@ -431,7 +431,7 @@ def build(vname):
 
     final = f"{OUT}/reaccion_{vname}_{cfg['nombre']}.mp4"
     run(["ffmpeg", "-y", "-v", "error", "-i", joined, "-i", f"{OUT}/{vname}_mix.wav",
-         "-f", "lavfi", "-i", f"color=c=0xD4A017:s=1080x12:r={FPS}:d={TOTAL:.3f}",
+         "-f", "lavfi", "-i", f"color=c=0xD4FF00:s=1080x12:r={FPS}:d={TOTAL:.3f}",
          "-filter_complex",
          f"[0][2]overlay=x='-W+W*t/{TOTAL:.3f}':y=H-12:shortest=1[b];[b]subtitles={ass}:fontsdir={FONTS}[v];"
          "[1]loudnorm=I=-14:TP=-1.5:LRA=11[a]",
