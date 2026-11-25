@@ -110,6 +110,8 @@ STYLES = {
                   kick=[0, 8, 14], clap=[8], hat=[], pulse=False, lp=None, pad=0.08, tom=[12, 14]),
     "tension": dict(bpm=92, chords=[[52, 55, 59], [52, 55, 59], [48, 52, 55], [47, 51, 54]], arp=0, wave="sine",
                     kick=[0], clap=[], hat=list(range(0, 16, 2)), pulse=True, lp=None, pad=0.06),
+    "oscuro": dict(bpm=96, chords=[[48, 51, 55], [44, 48, 51], [46, 50, 53], [43, 47, 50]], arp=0, wave="sine",
+                   kick=[0, 6, 8], clap=[12], hat=[4, 10, 14], pulse=True, lp=1800, pad=0.07, tom=[]),
     "lofi": dict(bpm=76, chords=[[48, 52, 55, 59], [45, 48, 52, 55], [50, 53, 57, 60], [43, 47, 50, 53]], arp=4,
                  wave="sine", kick=[0, 7, 10], clap=[4, 12], hat=[2, 6, 10, 14], pulse=False, lp=2800, pad=0.05),
 }
