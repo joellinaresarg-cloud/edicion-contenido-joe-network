@@ -99,20 +99,36 @@ def ding():
 
 # ---------------------------------------------------------------- Música
 
-def music(total, drums_from, break_from, cta_from, bpm=96):
-    """Base inspiracional: Am - F - C - G.
+STYLES = {
+    # chords: notas MIDI por compás; arp: subdivisiones por compás (0 = sin arpegio)
+    # kick/clap/hat: posiciones en semicorcheas (0-15) dentro del compás
+    "inspira": dict(bpm=96, chords=[[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]], arp=8, wave="sine",
+                    kick=[0, 8], clap=[4, 12], hat=[2, 6, 10, 14], pulse=False, lp=None, pad=0.05),
+    "tech": dict(bpm=118, chords=[[57, 60, 64], [57, 60, 64], [53, 57, 60], [55, 59, 62]], arp=16, wave="square",
+                 kick=[0, 4, 8, 12], clap=[4, 12], hat=[2, 6, 10, 14, 3, 7, 11, 15], pulse=True, lp=None, pad=0.035),
+    "epica": dict(bpm=84, chords=[[50, 53, 57], [46, 50, 53], [53, 57, 60], [48, 52, 55]], arp=0, wave="sine",
+                  kick=[0, 8, 14], clap=[8], hat=[], pulse=False, lp=None, pad=0.08, tom=[12, 14]),
+    "tension": dict(bpm=92, chords=[[52, 55, 59], [52, 55, 59], [48, 52, 55], [47, 51, 54]], arp=0, wave="sine",
+                    kick=[0], clap=[], hat=list(range(0, 16, 2)), pulse=True, lp=None, pad=0.06),
+    "lofi": dict(bpm=76, chords=[[48, 52, 55, 59], [45, 48, 52, 55], [50, 53, 57, 60], [43, 47, 50, 53]], arp=4,
+                 wave="sine", kick=[0, 7, 10], clap=[4, 12], hat=[2, 6, 10, 14], pulse=False, lp=2800, pad=0.05),
+}
+
+
+def music(total, drums_from, break_from, cta_from, style="inspira"):
+    """Música de fondo.
 
     drums_from: segundo donde entra la batería (después del hook).
     break_from: segundo donde se corta la batería (antes del CTA).
     cta_from:   segundo donde vuelve todo, más fuerte (CTA).
     """
+    P = STYLES[style]
     n = int(total * SR)
     L = np.zeros(n)
     R = np.zeros(n)
-    beat = 60 / bpm
+    beat = 60 / P["bpm"]
     bar = 4 * beat
-    chords = [[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]]
-    roots = [45, 41, 36, 43]
+    six = beat / 4
     rng = np.random.default_rng(7)
 
     def add(x, start, gl=1.0, gr=1.0):
@@ -123,11 +139,15 @@ def music(total, drums_from, break_from, cta_from, bpm=96):
         L[i:i + len(x)] += x * gl
         R[i:i + len(x)] += x * gr
 
+    def osc(f, tt):
+        if P["wave"] == "square":
+            return sum(np.sin(2 * np.pi * f * h * tt) / h for h in (1, 3, 5, 7))
+        return np.sin(2 * np.pi * f * tt) + 0.3 * np.sin(4 * np.pi * f * tt)
+
     nbars = int(np.ceil(total / bar)) + 1
     for b in range(nbars):
         t0 = b * bar
-        ch = chords[b % 4]
-        # Pad
+        ch = P["chords"][b % len(P["chords"])]
         tt = _t(bar + 1.0)
         env = np.minimum(1, tt / 0.5) * np.where(tt > bar, np.exp(-(tt - bar) * 4), 1)
         pad = np.zeros(len(tt))
@@ -135,56 +155,60 @@ def music(total, drums_from, break_from, cta_from, bpm=96):
             for det in (-0.004, 0.004):
                 f = _hz(m) * (1 + det)
                 pad += sum(np.sin(2 * np.pi * f * h * tt) / h ** 1.6 for h in range(1, 5))
-        pad = pad * env * 0.05
-        add(pad, t0, 1.0, 0.9)
-        # Bajo
-        tb = _t(bar)
-        bass = np.sin(2 * np.pi * _hz(roots[b % 4]) * tb) * np.minimum(1, tb / 0.02) * np.exp(-tb * 0.6)
-        add(bass * 0.22, t0)
-        # Arpegio
-        arp = ch + [ch[1] + 12, ch[2] + 12, ch[0] + 12, ch[2], ch[1]]
-        for k in range(8):
-            ta = _t(0.6)
-            f = _hz(arp[k % len(arp)] + 12)
-            x = (np.sin(2 * np.pi * f * ta) + 0.3 * np.sin(4 * np.pi * f * ta)) * np.exp(-ta * 7) * 0.06
-            pan = 0.35 + 0.3 * (k % 2)
-            add(x, t0 + k * beat / 2, 1 - pan + 0.3, pan + 0.3)
-    # Reverb
+        add(pad * env * P["pad"], t0, 1.0, 0.9)
+        root = _hz(ch[0] - 12)
+        if P["pulse"]:
+            for k in range(8):
+                tb = _t(beat / 2)
+                x = np.sin(2 * np.pi * root * tb) * np.exp(-tb * 6) * 0.2
+                add(x, t0 + k * beat / 2)
+        else:
+            tb = _t(bar)
+            bass = np.sin(2 * np.pi * root * tb) * np.minimum(1, tb / 0.02) * np.exp(-tb * 0.6)
+            add(bass * 0.22, t0)
+        if P["arp"]:
+            notes = ch + [ch[1] + 12, ch[2] + 12, ch[0] + 12, ch[2], ch[1]]
+            step = bar / P["arp"]
+            for k in range(P["arp"]):
+                ta = _t(min(0.6, step * 3))
+                f = _hz(notes[k % len(notes)] + 12)
+                x = osc(f, ta) * np.exp(-ta * 7) * (0.035 if P["wave"] == "square" else 0.06)
+                pan = 0.35 + 0.3 * (k % 2)
+                add(x, t0 + k * step, 1 - pan + 0.3, pan + 0.3)
     L = _reverb(L, 2.2, 0.35, 11)
     R = _reverb(R, 2.2, 0.35, 12)
 
-    # Batería
-    def kick():
-        tk = _t(0.4)
-        f = 45 + 90 * np.exp(-tk * 30)
-        return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tk * 9) * 0.5
+    tk = _t(0.4)
+    kick = np.sin(2 * np.pi * np.cumsum(45 + 90 * np.exp(-tk * 30)) / SR) * np.exp(-tk * 9) * 0.5
+    tc = _t(0.25)
+    clap = signal.lfilter(*signal.butter(2, [900 / (SR / 2), 3500 / (SR / 2)], "band"),
+                          rng.standard_normal(len(tc)) * np.exp(-tc * 22)) * 0.25
+    th = _t(0.05)
+    hat = signal.lfilter(*signal.butter(2, 7000 / (SR / 2), "high"),
+                         rng.standard_normal(len(th)) * np.exp(-th * 90)) * 0.07
+    tm = _t(0.5)
+    tom = np.sin(2 * np.pi * np.cumsum(70 + 60 * np.exp(-tm * 12)) / SR) * np.exp(-tm * 6) * 0.35
 
-    def clap():
-        tc = _t(0.25)
-        x = rng.standard_normal(len(tc)) * np.exp(-tc * 22)
-        return signal.lfilter(*signal.butter(2, [900 / (SR / 2), 3500 / (SR / 2)], "band"), x) * 0.25
-
-    def hat():
-        th = _t(0.05)
-        x = rng.standard_normal(len(th)) * np.exp(-th * 90)
-        return signal.lfilter(*signal.butter(2, 7000 / (SR / 2), "high"), x) * 0.07
-
-    k_, c_, h_ = kick(), clap(), hat()
-    t = drums_from
-    i = 0
-    while t < total:
-        in_break = break_from <= t < cta_from
-        if not in_break:
-            if i % 4 in (0, 2):
-                add(k_, t)
-            if i % 4 in (1, 3):
-                add(c_, t, 0.9, 1.0)
-            add(h_, t + beat / 2, 0.8, 1.0)
-        t += beat
-        i += 1
+    b = 0
+    while b * bar < total:
+        t0 = b * bar
+        for pos in range(16):
+            t = t0 + pos * six
+            if t < drums_from or (break_from <= t < cta_from):
+                continue
+            if pos in P["kick"]:
+                add(kick, t)
+            if pos in P["clap"]:
+                add(clap, t, 0.9, 1.0)
+            if pos in P["hat"]:
+                add(hat, t, 0.8, 1.0)
+            if pos in P.get("tom", []):
+                add(tom, t, 1.0, 0.8)
+        b += 1
 
     out = np.stack([L, R], 1)
-    # Volumen por sección: hook suave, cuerpo normal, CTA más fuerte
+    if P["lp"]:
+        out = signal.lfilter(*signal.butter(2, P["lp"] / (SR / 2)), out, axis=0)
     tt = np.arange(n) / SR
     g = np.where(tt < drums_from, 0.6, 1.0)
     g = np.where((tt >= break_from) & (tt < cta_from), 0.75, g)
@@ -192,7 +216,6 @@ def music(total, drums_from, break_from, cta_from, bpm=96):
     b_, a_ = [0.0005], [1, -0.9995]
     g, _ = signal.lfilter(b_, a_, g, zi=signal.lfilter_zi(b_, a_) * g[0])
     out *= g[:, None]
-    # Fade final
     fo = int(1.2 * SR)
     out[-fo:] *= np.linspace(1, 0, fo)[:, None]
     return _norm(out, 0.9)
