@@ -378,7 +378,7 @@ def build(vname):
     # ---------------- subtítulos y gráficos
     ev = []
     ev.append(f"Dialogue: 3,{ass_t(0)},{ass_t(total)},Logo,,0,0,0,,"
-              r"JOE{\c&H0000FFD4&}.NETWORK")
+              r"JOENETWORK{\c&H0000FFD4&}.ARG")
     if cfg["headline"]:
         l1, l2 = cfg["headline"]
         y1 = 300 if BLOCKS[cfg["hook"][0]]["layout"] == "full" else 640
@@ -395,7 +395,7 @@ def build(vname):
     ev.append(f"Dialogue: 5,{ass_t(total + 0.05)},{ass_t(TOTAL)},EndBig,,0,0,0,,{POP}{{\\pos(540,760)}}{e1}")
     ev.append(f"Dialogue: 5,{ass_t(total + 0.35)},{ass_t(TOTAL)},BoxGold,,0,0,0,,{POP}{{\\pos(540,920)}}{e2}")
     ev.append(f"Dialogue: 5,{ass_t(total + 0.8)},{ass_t(TOTAL)},LogoBig,,0,0,0,,{POP}"
-              r"{\pos(540,1120)}JOE{\c&H0000FFD4&}.NETWORK")
+              r"{\pos(540,1120)}JOENETWORK{\c&H0000FFD4&}.ARG")
     # subtítulos
     items = []
     for s, e, txt, src, st, lay in sorted(words_tl):

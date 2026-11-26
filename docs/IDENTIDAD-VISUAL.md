@@ -1,5 +1,7 @@
 # Manual de identidad visual · JOE.NETWORK
 
+> **Nombre de la cuenta: JOENETWORK.ARG** (no "JOE.NETWORK").
+>
 > **Identidad oficial vigente.** Reemplaza a la [guía anterior en negro y dorado](GUIA-DE-ESTILO.md).
 > Se aplica a todas las portadas, carruseles, reels, flyers, miniaturas, publicaciones y piezas educativas,
 > sin importar qué herramienta o inteligencia artificial las cree.
@@ -76,7 +78,7 @@ Evitar fotos genéricas de stock, ilustraciones infantiles y efectos tecnológic
 - Titular corto: **4 a 10 palabras**. Que genere curiosidad sin contar todo.
 - Legible desde el celular.
 - Texto importante dentro de la **zona segura central** (en la cuadrícula del perfil Instagram muestra la franja central 1080 × 1440).
-- Firma **JOE.NETWORK** discreta.
+- Firma discreta **JOENETWORK.ARG** ("JOENETWORK" en blanco y ".ARG" en lima), con el crédito del video original al lado cuando corresponda: `JOENETWORK.ARG · Video: @cuenta`.
 
 ## 7. Carruseles educativos
 

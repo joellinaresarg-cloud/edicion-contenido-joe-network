@@ -304,7 +304,7 @@ ev(cta_start + 1.6, TOTAL, "BoxGold", POP + r"{\pos(540,820)}ESCRIBIME AL PRIVAD
 ev(cta_start + 2.8, TOTAL, "PlaceSub", POP + r"{\pos(540,960)}ESPECIALMENTE SI ESTÁS EN")
 ev(cta_start + 3.2, TOTAL, "CtaCountry", POP + r"{\pos(540,1080)}MÉXICO · COLOMBIA")
 ev(cta_start + 4.3, TOTAL, "LogoBig",
-   POP + r"{\pos(540,1290)}JOE{\c&H0000FFD4&}.NETWORK")
+   POP + r"{\pos(540,1290)}JOENETWORK{\c&H0000FFD4&}.ARG")
 for d, g in [(0.25, 0.5), (1.6, 0.6), (3.2, 0.5)]:
     fx(syn.pop(int(d * 10)), cta_start + d, g)
 fx(syn.ding(), cta_start + 4.3, 0.4)
@@ -377,7 +377,7 @@ Style: Dim,Arial,20,&H70000000,&H70000000,&H00000000,&H00000000,0,0,0,0,100,100,
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
 logo = (f"Dialogue: 3,{ass_t(0)},{ass_t(cta_start)},Logo,,0,0,0,,"
-        r"JOE{\c&H0000FFD4&}.NETWORK")
+        r"JOENETWORK{\c&H0000FFD4&}.ARG")
 with open(f"{OUT}/subs.ass", "w") as f:
     f.write(header + "\n".join([logo] + graphics + caps) + "\n")
 
