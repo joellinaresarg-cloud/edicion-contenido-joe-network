@@ -115,3 +115,14 @@ Ejemplos de titulares por tema:
 | Negocios | VENDER NO ES CONVENCER |
 | Desarrollo personal | SER INTELIGENTE NO ALCANZA |
 | Comunicación | APRENDÉ A CONECTAR |
+
+## 11. Subtítulos de videos de noticias (franja inferior) — estilo aprobado
+
+Para videos de terceros con texto informativo (ej. drones que cosechan manzanas):
+
+- **Altura:** a ~¾ del video (texto principal en y ≈ 1450 de 1920), sobre una **franja oscura difuminada** (#101410, ~70 % de opacidad en el centro, bordes suaves).
+- **Línea 1 (español):** una sola línea corta, **lima #D4FF00**, Barlow Condensed ExtraBold Italic, mayúsculas.
+- **Línea 2 (inglés):** blanco, Barlow Condensed SemiBold, más chica, debajo.
+- **Línea 3:** firma y crédito chicos: `JOENETWORK.ARG · Video: @cuenta` (".ARG" en lima).
+- Aparición suave (fundido + leve subida), sin animaciones bruscas.
+- **Audio original** del video, normalizado a −14 LUFS para que se escuche bien en Instagram.
